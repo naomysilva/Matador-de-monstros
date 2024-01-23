@@ -1,1 +1,338 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16"></script>
+<!-- Load required Bootstrap and BootstrapVue CSS -->
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+<!-- Load polyfills to support older browsers -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+<!-- Load Vue followed by BootstrapVue -->
+<script src="https://unpkg.com/vue@latest/dist/vue.min.js"></script>
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+<!-- Load the following for BootstrapVueIcons support -->
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+<style>
+    html {
+        font-family: 'Roboto', sans-serif;
+    }
+    button {
+        color: white;
+        border: none;
+    }
+    .ataque {
+        background-color: red;
+        
+    }
+    .ataque-esp {
+        background-color: rgb(255, 255, 7);
+    }
+    .cura {
+        background-color: aqua;
+    }
+    .des {
+        background-color: black;
+    }
+    .barra-progress {
+        height: 30px;
+        width: 500px;
+        border: 1px solid #000;
+    }
+    .progresso {
+        background-color: green;
+        height: 100%;
+    }
+
+    .bv {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .plays {
+        box-shadow: 11px 15px 100px 36px rgba(0,0,0,0.1);
+    }
+    .start {
+        background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .start:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+      .atack {
+            background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+          .atack:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+         
+      }
+               
+      .special-atack {
+        background-image: linear-gradient(to right, #F09819 0%, #EDDE5D  51%, #F09819  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .special-atack:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+               
+      .cure {
+        background-image: linear-gradient(to right, #00d2ff 0%, #3a7bd5  51%, #00d2ff  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .cure:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+               
+      .quit {
+        background-image: linear-gradient(to right, #603813 0%, #b29f94  51%, #603813  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .quit:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+              
+      .valuePlay {
+        background-image: linear-gradient(to right, #ED4264 0%, #FFEDBC  51%, #ED4264  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .valuePlay:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+     
+               
+      .valueMoster {
+        background-image: linear-gradient(to right, #f857a6 0%, #ff5858  51%, #f857a6  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .valueMoster:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+     
+              
+      .result {
+        background-image: linear-gradient(to right, #ee0979 0%, #ff6a00  51%, #ee0979  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .result:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+     
+     
+     
+</style>
+
+<div id="app">
+    <b-container class="bv mt-5 py-5">
+        <b-row class="plays py-5 px-5 text-center">
+          <b-col cols="6 px-5">
+            <h2> Jogador </h2>
+            <div class="barra-progress mt-3 mb-3">
+                <div class="progresso" :style="{ width: width.acumuladorPlay }"></div>
+            </div>
+            </b-col>
+            <b-col cols="6 px-5">
+                <h2> Monstro </h2>
+                <div class="barra-progress mt-3 mb-3">
+                    <div class="progresso" :style="{ width: width.acumuladorMonster }"></div>
+                </div>
+            </b-col>
+        </b-row>
+        <b-row v-if="isVisible" class="mt-5 justify-content-md-center">
+            <button class="start" @click="toggleVisibility" >Star</button>
+        </b-row>
+        <b-row v-else class="mt-5 justify-content-md-center">
+            <b-col cols="2">
+                <button class="atack" @click="ataque">Ataque</button>
+            </b-col>
+            <b-col cols="3">
+                <button class="special-atack" @click="ataqueEspecial">Ataque Especial</button>
+            </b-col>
+            <b-col cols="2">
+                <button class="cure" @click="cura">Cura</button>
+            </b-col>
+            <b-col cols="2">
+                <button class="quit" @click="toggleVisibility">Desistir</button>
+            </b-col>
+            <div v-show="showButtons">
+                <p class="result">{{ msg }}</p>
+                <h2 class="valuePlay">{{ValorPlay}}</h2>
+                <h2 class="valueMoster">{{ ValorMoster}}</h2>
+            </div>
+        </b-row>
+      </b-container>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            width: {
+                acumuladorPlay: '100%',
+                acumuladorMonster: '100%',
+              },
+            acumuladorPlay: undefined,
+            acumuladorMonster: undefined,
+            msg: '',
+            isVisible: true,
+            ValorPlay: "",
+            ValorMoster: "",
+            isShow: false
+        },
+        methods: {
+            realizarAtaque(danoPlay, danoMonster) {
+                if (this.acumuladorPlay === undefined && this.acumuladorMonster === undefined) {
+                    this.acumuladorPlay = 100;
+                    this.acumuladorMonster = 100;
+                }
+                if (this.acumuladorPlay > 0 || this.acumuladorMonster > 0) {
+                    this.acumuladorPlay -= danoPlay;
+                    this.acumuladorMonster -= danoMonster;
+
+                    this.acumuladorPlay = Math.max(0, this.acumuladorPlay);
+                    this.acumuladorMonster = Math.max(0, this.acumuladorMonster);
+            
+                    if (this.acumuladorMonster === 0 && this.acumuladorPlay === 0) {
+                      this.msg = "Empate";
+                    } else if (this.acumuladorMonster === 0 && this.acumuladorPlay !== 0) {
+                      this.msg = "Você ganhou!";
+                    } else if (this.acumuladorMonster > 0 && this.acumuladorPlay === 0) {
+                      this.msg = "Você perdeu";
+                    }
+                  }
+                this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
+                this.width.acumuladorMonster = `${this.acumuladorMonster}%`;
+                
+                this.ValorPlay = `Jogador atacou: ${danoPlay} de dano`;
+                this.ValorMoster = `Monstro atacou: ${danoMonster} de dano`;
+            },
+            cura() {
+                const curaPlayer = Math.floor(Math.random() * 15);
+                const curaMonster = Math.floor(Math.random() * 11);
+            
+                this.acumuladorPlay = Math.min(100, this.acumuladorPlay + curaMonster);
+                this.ataque(this.acumuladorPlay,curaMonster)
+            
+                this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
+                
+            
+                this.ValorPlay = `Jogador recebeu: ${curaPlayer} de cura`;
+                this.ValorMoster = `Monstro atacou: ${curaMonster} de dano`;
+            },
+
+            ataque() {
+                this.realizarAtaque(Math.floor(Math.random() * 20) , Math.floor(Math.random() * 10));
+            },
+            ataqueEspecial() {
+                this.realizarAtaque(Math.floor(Math.random() * 20) , Math.floor(Math.random() * 35));
+            },
+            toggleVisibility() {
+                this.isVisible = !this.isVisible; 
+            },
+            showButtons(){
+                if(this.ataque){
+                    isShow = true
+                }
+            }
+        }
+    })
+</script>
