@@ -251,10 +251,10 @@
                 <button class="cure" @click="cura">Cura</button>
             </b-col>
             <b-col cols="2">
-                <button class="quit" @click="toggleVisibility">Desistir</button>
+                <button class="quit" @click="toggleVisibility">Recomeçar</button>
             </b-col>
-            <div v-show="showButtons">
-                <p class="result">{{ msg }}</p>
+            <div>
+                <p v-show="showButtons" class="result">{{ msg }}</p>
                 <h2 class="valuePlay">{{ValorPlay}}</h2>
                 <h2 class="valueMoster">{{ ValorMoster}}</h2>
             </div>
@@ -276,7 +276,8 @@
             isVisible: true,
             ValorPlay: "",
             ValorMoster: "",
-            isShow: false
+            isShow: false,
+            showButtons: false,
         },
         methods: {
             realizarAtaque(danoPlay, danoMonster) {
@@ -284,7 +285,7 @@
                     this.acumuladorPlay = 100;
                     this.acumuladorMonster = 100;
                 }
-                if (this.acumuladorPlay > 0 || this.acumuladorMonster > 0) {
+                if (this.acumuladorPlay > 0 && this.acumuladorMonster > 0) {
                     this.acumuladorPlay -= danoPlay;
                     this.acumuladorMonster -= danoMonster;
 
@@ -293,30 +294,43 @@
             
                     if (this.acumuladorMonster === 0 && this.acumuladorPlay === 0) {
                       this.msg = "Empate";
+                      this.showButtons = true
                     } else if (this.acumuladorMonster === 0 && this.acumuladorPlay !== 0) {
                       this.msg = "Você ganhou!";
+                      this.showButtons = true
                     } else if (this.acumuladorMonster > 0 && this.acumuladorPlay === 0) {
                       this.msg = "Você perdeu";
+                      this.showButtons = true
                     }
+                    this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
+                    this.width.acumuladorMonster = `${this.acumuladorMonster}%`;
+                    
+                    this.ValorPlay = `Jogador atacou: ${danoPlay} de dano`;
+                    this.ValorMoster = `Monstro atacou: ${danoMonster} de dano`;
                   }
-                this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
-                this.width.acumuladorMonster = `${this.acumuladorMonster}%`;
-                
-                this.ValorPlay = `Jogador atacou: ${danoPlay} de dano`;
-                this.ValorMoster = `Monstro atacou: ${danoMonster} de dano`;
+
             },
             cura() {
                 const curaPlayer = Math.floor(Math.random() * 15);
                 const curaMonster = Math.floor(Math.random() * 11);
-            
-                this.acumuladorPlay = Math.min(100, this.acumuladorPlay + curaMonster);
-                this.ataque(this.acumuladorPlay,curaMonster)
-            
-                this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
                 
-            
-                this.ValorPlay = `Jogador recebeu: ${curaPlayer} de cura`;
-                this.ValorMoster = `Monstro atacou: ${curaMonster} de dano`;
+                if(isNaN(this.acumuladorPlay) && isNaN(this.acumuladorMonster)) {
+                  console.log("Não acionado")
+                } else if(this.acumuladorPlay > 0 && this.acumuladorMonster > 0) {
+                  
+                  this.acumuladorPlay = Math.min(100, this.acumuladorPlay + curaMonster);
+                  this.ataque(this.acumuladorPlay,curaMonster)
+              
+                  this.width.acumuladorPlay = `${this.acumuladorPlay}%`;
+                  
+              
+                  this.ValorPlay = `Jogador recebeu: ${curaPlayer} de cura`;
+                  this.ValorMoster = `Monstro atacou: ${curaMonster} de dano`;
+  
+
+                  console.log("Moster: " + this.acumuladorMonster)
+                }
+
             },
 
             ataque() {
@@ -329,6 +343,16 @@
                 this.isVisible = !this.isVisible;
                 this.width.acumuladorMonster = '100%';
                 this.width.acumuladorPlay = '100%';
+                this.msg = '';
+                this.ValorPlay = "";
+                this.ValorMoster= "";
+                this.acumuladorPlay = undefined;
+                this.acumuladorMonster= undefined;
+                this.showButtons = false
+            },
+            stopAtack(){
+              this.danoPlay = 100,
+              this.danoPlay = 100
             },
             showButtons(){
                 if(this.ataque){
